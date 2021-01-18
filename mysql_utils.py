@@ -52,13 +52,13 @@ class MySQLUtils:
 
         return result
 
-    def has_table(self, table_name):
+    def has_table(self, table_name: str) -> bool:
         """
             该用户下是否存在表table_name
         """
-        sql = "SELECT count(*) FROM information_schema.TABLES WHERE table_name =%(table_name)s"
+        sql = "SELECT count(*) total FROM information_schema.TABLES WHERE table_name =%(table_name)s"
         arg = {'table_name': table_name}
-        return self.fetchone(sql, arg)[table_name] == 1
+        return self.fetchone(sql, arg).get('total') == 1
 
     def exist_data_by_kw(self, table_name: str, data: dict):
         """表table_name中是否存在where key = value的数据"""
