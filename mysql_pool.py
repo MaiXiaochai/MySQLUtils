@@ -13,7 +13,7 @@ from dbutils.pooled_db import PooledDB
 from pymysql.cursors import DictCursor
 
 
-class MySQLUtils:
+class MySQLConnectionPool:
     """MySQL 基本功能封装 """
 
     def __init__(self,

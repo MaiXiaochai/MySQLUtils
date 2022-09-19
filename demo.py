@@ -9,6 +9,7 @@
 ------------------------------------------
 """
 from mysql_utils import MySQLUtils
+from mysql_pool import MySQLConnectionPool
 
 
 def main():
@@ -25,5 +26,24 @@ def main():
     print(result)
 
 
+def demo_mysql_connection_pool():
+    cfg = {
+        'host': '192.168.x.x',
+        'port': 3306,
+        'user': 'maxiaochai',
+        'passwd': 'maxiaochai',
+        'db': 'maxiaochai'
+    }
+
+    db = MySQLConnectionPool(**cfg)
+    table_name = 'maxiaochai'
+    sql = f"select count(*) total from {table_name}"
+    result = db.fetchone(sql)
+    number = result.get('total')
+    print(result)
+    print(number, type(number))
+
+
 if __name__ == '__main__':
-    main()
+    # main()
+    demo_mysql_connection_pool()
