@@ -22,7 +22,6 @@ class MySQLUtils:
                  user: str,
                  passwd: str,
                  db: str):
-
         self.conn = connect(
             host=host,
             port=port,
@@ -42,15 +41,11 @@ class MySQLUtils:
 
     def fetchall(self, sql, args=None):
         self.execute(sql, args)
-        result = self.cur.fetchall()
-
-        return result
+        return self.cur.fetchall()
 
     def fetchone(self, sql, args=None):
         self.execute(sql, args)
-        result = self.cur.fetchone()
-
-        return result
+        return self.cur.fetchone()
 
     def has_table(self, table_name: str) -> bool:
         """
@@ -68,16 +63,12 @@ class MySQLUtils:
         sql = exist_sql.format(table_name, k)
 
         f_data = self.fetchone(sql, data)
-        result = True if f_data else False
-
-        return result
+        return f_data
 
     @property
     def rowcount(self):
         """受影响的行数"""
-        count = self.cur.rowcount
-
-        return count
+        return self.cur.rowcount
 
     def commit(self):
         self.conn.commit()
@@ -86,10 +77,7 @@ class MySQLUtils:
         self.conn.rollback()
 
     def close(self):
-        try:
-            self.conn.close()
-        except Exception as err:
-            print(str(err))
+        self.conn.close()
 
     def __del__(self):
         self.close()
