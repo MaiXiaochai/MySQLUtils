@@ -62,8 +62,7 @@ class MySQLUtils:
         exist_sql = "select * from {0} where {1} = %({1})s"
         sql = exist_sql.format(table_name, k)
 
-        f_data = self.fetchone(sql, data)
-        return f_data
+        return self.fetchone(sql, data)
 
     @property
     def rowcount(self):
