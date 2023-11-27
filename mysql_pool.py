@@ -27,7 +27,7 @@ class MySQLConnectionPool:
         self.__pool = self.gen_pool(host, port, user, passwd, db)  # 返回类字典类型游标
 
     @staticmethod
-    def gen_pool(host, port, user, passwd, db, charset='utf8', cursorclass=DictCursor):
+    def gen_pool(host, port, user, passwd, db, charset='utf8'):
         pool = PooledDB(
             creator=pymysql,  # 使用链接数据库的模块
             mincached=0,  # 初始化连接池时创建的连接数。默认为0，即初始化时不创建连接(建议默认0，假如非0的话，在某些数据库不可用时，整个项目会启动不了)
@@ -44,7 +44,6 @@ class MySQLConnectionPool:
             passwd=passwd,
             db=db,
             charset=charset,
-            cursorclass=cursorclass,
             use_unicode=True
         )
         return pool

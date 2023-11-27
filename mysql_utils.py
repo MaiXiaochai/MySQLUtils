@@ -28,12 +28,12 @@ class MySQLUtils:
             user=user,
             passwd=passwd,
             db=db,
-            charset='utf8',  # utf8mb4 是utf8的超集
-            cursorclass=DictCursor)  # 返回类字典类型游标
+            charset='utf8')  # utf8mb4 是utf8的超集
         self.cur = self.conn.cursor()
 
     def execute(self, sql, args=None):
         self.cur.execute(sql, args)
+        self.commit()
 
     def executemany(self, sql, args):
         self.cur.executemany(sql, args)
